@@ -2,6 +2,54 @@
 
 const HashMap = require('./HashMap');
 
+function removeDups(string) {
+  const charPositions = new HashMap();
+  
+  for (let i = string.length - 1; i >= 0; i--) {
+    charPositions.set(string[i], i);
+  }
+
+  let output = '';
+
+  for (let i = 0; i < string.length; i++) {
+
+    if (i === charPositions.get(string[i])) {
+      output += string[i];
+    }
+
+  }
+
+  return output;
+}
+
+function existsPalindrome(string) {
+  const chars = removeDups(string);
+  const charCounter = new HashMap();
+
+  for (let i = 0; i < string.length; i++) {
+
+    if (i < chars.length) {
+      charCounter.set(chars[i], 0);
+    }
+
+    charCounter.set(string[i], charCounter.get(string[i]) + 1);
+  }
+
+  let uneven = 0;
+
+  for (let i = 0; i < chars.length; i++) {
+    const count = charCounter.get(chars[i]);
+    if (count % 2 !== 0) {
+      uneven++;
+    }
+    if (uneven > 1) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function main() {
   const lor = new HashMap();
   lor.set('Hobbit', 'Bilbo');
@@ -47,7 +95,12 @@ function main() {
   //     19               33
   //     10
 
-  
+  // Exercise 4
+  console.log(removeDups('google all that you think can think of'));
+
+  // Exercise 5
+  console.log(existsPalindrome('acecarr'));
+  console.log(existsPalindrome('north'));
 
 }
 
