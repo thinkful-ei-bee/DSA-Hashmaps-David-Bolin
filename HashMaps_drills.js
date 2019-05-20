@@ -1,6 +1,6 @@
 'use strict';
 
-const HashMap = require('./HashMap');
+const HashMap = require('./HashMapSep');
 
 function removeDups(string) {
   const charPositions = new HashMap();
