@@ -60,6 +60,12 @@ class HashMap {
     return this._hashTable[index].value;
   }
 
+  has(key) {
+    const index = this._findSlot(key);
+
+    return !(this._hashTable[index] === undefined);
+  }
+
   set(key, value) {
     const loadRatio = (this.length + this._deleted + 1) / this._capacity;
 

@@ -50,6 +50,26 @@ function existsPalindrome(string) {
   return true;
 }
 
+function groupAnagrams(arr) {
+  const keysMap = new HashMap();
+  const keysArray = [];
+  for (let i = 0; i < arr.length; i++) {
+    const word = arr[i];
+    const sortedWord = word.split('').sort().join();
+
+    if (keysMap.has(sortedWord)) {
+      const currentArr = keysMap.get(sortedWord);  
+      currentArr.push(word);
+      keysMap.set(sortedWord, currentArr);
+    } else {
+      keysArray.push(sortedWord);
+      keysMap.set(sortedWord, [word]);
+    }
+  }
+
+  return keysArray.map(key => keysMap.get(key));
+}
+
 function main() {
   const lor = new HashMap();
   lor.set('Hobbit', 'Bilbo');
@@ -102,6 +122,8 @@ function main() {
   console.log(existsPalindrome('acecarr'));
   console.log(existsPalindrome('north'));
 
+  // Exercise 6
+  console.log(groupAnagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']));
 }
 
 main();
